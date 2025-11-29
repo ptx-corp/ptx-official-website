@@ -20,12 +20,12 @@ export function Navigation() {
   }, []);
 
   const navLinks = [
-    { href: "#home", label: "Home" },
-    { href: "#services", label: "Services" },
-    { href: "#portfolio", label: "Portfolio" },
-    { href: "#press", label: "Press" },
-    { href: "#team", label: "Team" },
-    { href: "#contact", label: "Contact" },
+    { href: "/", label: "Home" },
+    { href: "/#services", label: "Services" },
+    { href: "/#portfolio", label: "Portfolio" },
+    { href: "/#press", label: "Press" },
+    { href: "/#team", label: "Team" },
+    { href: "/#contact", label: "Contact" },
   ];
 
   const handleLinkClick = () => {
@@ -34,16 +34,15 @@ export function Navigation() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled
           ? "bg-background/95 backdrop-blur-md shadow-md border-b border-zinc-200 dark:border-zinc-800"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="#home" className="flex items-center" onClick={handleLinkClick}>
+          <Link href="/" className="flex items-center" onClick={handleLinkClick}>
             <Logo className="w-12 sm:w-16 md:w-20 h-auto" />
           </Link>
 
@@ -53,7 +52,7 @@ export function Navigation() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-foreground hover:text-accent transition-colors"
+                className="text-sm font-semibold text-foreground hover:text-accent transition-colors"
               >
                 {link.label}
               </Link>
@@ -81,9 +80,8 @@ export function Navigation() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden bg-background border-t border-zinc-200 dark:border-zinc-800 shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${
-          isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        }`}
+        className={`md:hidden bg-background border-t border-zinc-200 dark:border-zinc-800 shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}
       >
         <div className="container mx-auto px-6 py-4">
           <div className="flex flex-col gap-4">
@@ -92,7 +90,7 @@ export function Navigation() {
                 key={link.href}
                 href={link.href}
                 onClick={handleLinkClick}
-                className="text-base font-medium text-foreground hover:text-accent transition-all py-2 animate-fade-in-up"
+                className="text-base font-semibold text-foreground hover:text-accent transition-all py-2 animate-fade-in-up"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 {link.label}

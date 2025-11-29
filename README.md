@@ -1,59 +1,101 @@
-# ptx-official-website
+# PT X Official Website
 
-This is the official website for PTX Co., Ltd. It's an open-source project built with [Next.js](https://nextjs.org) (App Router), [Tailwind CSS](https://tailwindcss.com/), and uses Markdown files for content management. The site is designed for static HTML export, making it compatible with platforms like [Cloudflare Pages](https://pages.cloudflare.com/).
+This is the official website for PT X, a technology company specializing in innovative software solutions. Built with [Next.js](https://nextjs.org) (App Router) and [Tailwind CSS](https://tailwindcss.com/), it features a dynamic project portfolio managed via Markdown files. The site is optimized for static HTML export, making it compatible with platforms like [Cloudflare Pages](https://pages.cloudflare.com/).
 
 ## Features
 
--   **Next.js App Router:** Modern React framework for building web applications.
--   **Tailwind CSS:** Utility-first CSS framework for rapid UI development.
--   **Markdown Content:** Manage "Projects" or "Articles" using Markdown files with Frontmatter.
--   **Static HTML Export:** Optimized for deployment on static hosting platforms.
--   **`gray-matter`:** Parses Frontmatter from Markdown files.
--   **`date-fns`:** For efficient date manipulation and sorting of content.
--   **`remark` & `remark-html`:** Converts Markdown content to HTML for rendering.
+-   **Next.js App Router:** Modern React framework for building performant web applications.
+-   **Tailwind CSS:** Utility-first CSS framework for rapid, responsive UI development.
+-   **Dynamic Portfolio:** Manage projects using Markdown files with Frontmatter.
+-   **Featured Projects:** Pin important projects to the home page using a simple flag.
+-   **Pagination:** Automatically paginated project listing page (`/projects`).
+-   **CLI Generator:** Built-in script to easily generate new project files.
+-   **Static Export:** Configured for static HTML export (`output: 'export'`).
+-   **Dark Mode:** Built-in dark/light mode support using `next-themes`.
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies:
+
+```bash
+npm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx` or adding new Markdown files in the `_projects` directory. The page auto-updates as you edit the files.
+## Managing Projects
 
-### Building and Exporting for Production
+Projects are stored as Markdown files in the `_projects/` directory. Each file contains frontmatter for metadata and the main content.
 
-To build your application and export it as static HTML:
+### Creating a New Project
+
+You can easily create a new project using the included CLI script:
+
+```bash
+npm run new-project
+```
+
+Follow the prompts to enter the project title, excerpt, tags, and cover image. The script will generate a new `.md` file with the correct format.
+
+### Project Frontmatter
+
+A typical project file looks like this:
+
+```markdown
+---
+title: 'My Awesome Project'
+date: '2024-11-29'
+excerpt: 'A brief description of the project.'
+coverImage: '/projects/my-image.jpg'
+featured: true
+tags: ['React', 'Next.js', 'TypeScript']
+---
+
+## Project Overview
+
+Your content goes here...
+```
+
+*   **title**: The name of the project.
+*   **date**: The publication date (YYYY-MM-DD). Used for sorting.
+*   **excerpt**: A short summary displayed on the card.
+*   **coverImage**: Path to the project image (stored in `public/projects/`).
+*   **featured**: Set to `true` to pin this project to the top of the Home page list.
+*   **tags**: A list of technologies or categories.
+
+### Featured Projects
+
+The Home page displays the top 3 projects. Projects marked with `featured: true` will appear first, followed by the most recent non-featured projects.
+
+### All Projects
+
+The `/projects` page lists all projects with pagination (6 projects per page).
+
+## Building for Production
+
+To build the application for production (static HTML export):
 
 ```bash
 npm run build
-npm run export
 ```
 
-The static files will be generated in the `out` directory.
+The static files will be generated in the `out` directory. You can deploy this directory to any static hosting provider (Cloudflare Pages, Vercel, Netlify, GitHub Pages, etc.).
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
-
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deployment
-
-This project is configured for static HTML export, making it ideal for deployment on platforms like [Cloudflare Pages](https://pages.cloudflare.com/). After running `npm run build` and `npm run export`, simply deploy the contents of the `out` directory to your chosen static hosting provider.
+*   `app/`: Next.js App Router pages and API routes.
+*   `components/`: Reusable React components (Navigation, ProjectList, etc.).
+*   `lib/`: Utility functions (Markdown parsing, API logic).
+*   `_projects/`: Markdown source files for portfolio projects.
+*   `public/`: Static assets (images, logos).
+*   `scripts/`: Utility scripts (project generator).
 
 ## Licensing
 
-Code is MIT Licensed, but Logos and Branding assets are proprietary to PTX Co., Ltd.
+Code is MIT Licensed. Logos, branding assets, and project content are proprietary to PT X.

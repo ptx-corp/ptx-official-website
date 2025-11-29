@@ -53,7 +53,17 @@ export async function getAllProjects(): Promise<Project[]> {
   }));
 
   // Sort projects by date in descending order
-  return allProjectsData.sort((project1, project2) =>
-    compareDesc(new Date(project1.frontmatter.date), new Date(project2.frontmatter.date))
-  );
+  // Sort projects: Featured first, then by date in descending order
+  return allProjectsData.sort((project1, project2) => {
+    // If one is featured and the other isn't, the featured one comes first
+    if (project1.frontmatter.featured && !project2.frontmatter.featured) {
+      return -1;
+    }
+    if (!project1.frontmatter.featured && project2.frontmatter.featured) {
+      return 1;
+    }
+
+    // Otherwise, sort by date
+    return compareDesc(new Date(project1.frontmatter.date), new Date(project2.frontmatter.date));
+  });
 }

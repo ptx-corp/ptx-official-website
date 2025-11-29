@@ -2,16 +2,37 @@
 
 import Logo from "../components/Logo";
 import Link from "next/link";
-import { ArrowRight, Code, Sparkles, Users, Award, MessageCircle, Mail, Newspaper, Calendar, ExternalLink } from "lucide-react";
+import { ArrowRight, Code, Sparkles, Users, Award, MessageCircle, Mail, Newspaper, Calendar, ExternalLink, Pin } from "lucide-react";
 import { ScrollAnimation } from "../components/ScrollAnimation";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { useCountAnimation } from "../hooks/useCountAnimation";
 
+
+interface Project {
+  slug: string;
+  frontmatter: {
+    title: string;
+    excerpt: string;
+    coverImage: string;
+    gradient?: string;
+    tags: string[];
+    date: string;
+    featured?: boolean;
+  };
+}
+
 export default function Home() {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [animationTrigger, setAnimationTrigger] = useState(0);
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    fetch('/api/projects')
+      .then(res => res.json())
+      .then(data => setProjects(data));
+  }, []);
 
   // Animated counters - re-trigger on theme change
   const projectsCount = useCountAnimation(50, 2000, mounted ? animationTrigger : false);
@@ -195,103 +216,54 @@ export default function Home() {
             </p>
           </ScrollAnimation>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="group bg-background rounded-xl overflow-hidden border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-xl">
-              <div className="aspect-video bg-gradient-to-br from-primary to-accent"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
-                  E-Commerce Platform
-                </h3>
-                <p className="text-zinc-600 dark:text-zinc-400 mb-4">
-                  A comprehensive online marketplace with advanced inventory management and payment integration.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">React</span>
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">Node.js</span>
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">PostgreSQL</span>
+            {projects.map((project, index) => (
+              <Link href={`/projects/${project.slug}`} key={project.slug} className="group bg-background rounded-xl overflow-hidden border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-xl flex flex-col">
+                <div className="aspect-video relative overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+                  {project.frontmatter.coverImage ? (
+                    <img
+                      src={project.frontmatter.coverImage}
+                      alt={project.frontmatter.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-br ${project.frontmatter.gradient || 'from-primary to-accent'}`}></div>
+                  )}
+                  {project.frontmatter.featured && (
+                    <div className="absolute top-3 right-3 bg-accent text-white p-2 rounded-full shadow-lg z-10" title="Featured Project">
+                      <Pin className="w-4 h-4 fill-current" />
+                    </div>
+                  )}
                 </div>
-              </div>
-            </div>
-            <div className="group bg-background rounded-xl overflow-hidden border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-xl">
-              <div className="aspect-video bg-gradient-to-br from-accent to-sun"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
-                  Healthcare Management System
-                </h3>
-                <p className="text-zinc-600 dark:text-zinc-400 mb-4">
-                  Digital solution for patient management, appointments, and medical records.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">Next.js</span>
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">TypeScript</span>
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">MongoDB</span>
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400 mb-3">
+                    <Calendar className="w-3 h-3" />
+                    <span>{new Date(project.frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
+                    {project.frontmatter.title}
+                  </h3>
+                  <p className="text-zinc-600 dark:text-zinc-400 mb-4 flex-1">
+                    {project.frontmatter.excerpt}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.frontmatter.tags.map(tag => (
+                      <span key={tag} className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">{tag}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="group bg-background rounded-xl overflow-hidden border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-xl">
-              <div className="aspect-video bg-gradient-to-br from-sky to-primary"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
-                  Financial Analytics Dashboard
-                </h3>
-                <p className="text-zinc-600 dark:text-zinc-400 mb-4">
-                  Real-time data visualization and reporting for investment portfolio management.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">Vue.js</span>
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">Python</span>
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">Redis</span>
-                </div>
-              </div>
-            </div>
-            <div className="group bg-background rounded-xl overflow-hidden border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-xl">
-              <div className="aspect-video bg-gradient-to-br from-spots to-night-sky"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
-                  Smart Logistics Platform
-                </h3>
-                <p className="text-zinc-600 dark:text-zinc-400 mb-4">
-                  AI-powered route optimization and real-time tracking for delivery services.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">React Native</span>
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">Go</span>
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">Docker</span>
-                </div>
-              </div>
-            </div>
-            <div className="group bg-background rounded-xl overflow-hidden border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-xl">
-              <div className="aspect-video bg-gradient-to-br from-sun to-accent"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
-                  Education Learning Portal
-                </h3>
-                <p className="text-zinc-600 dark:text-zinc-400 mb-4">
-                  Interactive online learning platform with video streaming and progress tracking.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">Angular</span>
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">Django</span>
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">AWS</span>
-                </div>
-              </div>
-            </div>
-            <div className="group bg-background rounded-xl overflow-hidden border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-xl">
-              <div className="aspect-video bg-gradient-to-br from-primary to-sky"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
-                  IoT Monitoring System
-                </h3>
-                <p className="text-zinc-600 dark:text-zinc-400 mb-4">
-                  Industrial IoT platform for real-time sensor data collection and analysis.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">Node.js</span>
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">MQTT</span>
-                  <span className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent">InfluxDB</span>
-                </div>
-              </div>
-            </div>
+              </Link>
+            ))}
           </div>
+
+          <ScrollAnimation delay={200} animation="fade-in" className="text-center mt-12">
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 px-8 py-3 border-2 border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-accent-foreground transition-all"
+            >
+              View All Projects
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </ScrollAnimation>
         </div>
       </section>
 
@@ -470,40 +442,98 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Team/About Section */}
-      <section id="team" className="py-24 bg-zinc-50 dark:bg-zinc-900/50 scroll-mt-20">
+      {/* Clients Section */}
+      <section id="clients" className="py-24 bg-zinc-50 dark:bg-zinc-900/50 scroll-mt-20">
         <div className="container mx-auto px-6">
           <ScrollAnimation animation="fade-in-up" className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Our Team</h2>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Our Clients</h2>
             <p className="text-lg text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto">
-              Meet the talented people behind our success
+              Trusted by leading companies across various industries
             </p>
           </ScrollAnimation>
-          <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
-            <div className="text-center">
-              <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary to-accent mb-4"></div>
-              <h3 className="font-semibold text-lg mb-1">Alex Thompson</h3>
-              <p className="text-sm text-accent mb-2">CEO & Founder</p>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">Visionary leader with 15+ years in tech</p>
-            </div>
-            <div className="text-center">
-              <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-accent to-sun mb-4"></div>
-              <h3 className="font-semibold text-lg mb-1">Jessica Lee</h3>
-              <p className="text-sm text-accent mb-2">CTO</p>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">Tech innovator & architecture expert</p>
-            </div>
-            <div className="text-center">
-              <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-sky to-primary mb-4"></div>
-              <h3 className="font-semibold text-lg mb-1">David Park</h3>
-              <p className="text-sm text-accent mb-2">Lead Developer</p>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">Full-stack expert & team mentor</p>
-            </div>
-            <div className="text-center">
-              <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-spots to-night-sky mb-4"></div>
-              <h3 className="font-semibold text-lg mb-1">Maria Santos</h3>
-              <p className="text-sm text-accent mb-2">Design Director</p>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">UX/UI specialist & creative thinker</p>
-            </div>
+
+          {/* Client Logos Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-16">
+            <ScrollAnimation delay={100} animation="fade-in">
+              <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
+                <div className="text-center">
+                  <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-primary to-accent mb-3 flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">TC</span>
+                  </div>
+                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">TechCorp Global</p>
+                </div>
+              </div>
+            </ScrollAnimation>
+            <ScrollAnimation delay={150} animation="fade-in">
+              <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
+                <div className="text-center">
+                  <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-accent to-sun mb-3 flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">FI</span>
+                  </div>
+                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">FinanceInc</p>
+                </div>
+              </div>
+            </ScrollAnimation>
+            <ScrollAnimation delay={200} animation="fade-in">
+              <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
+                <div className="text-center">
+                  <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-sky to-primary mb-3 flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">HC</span>
+                  </div>
+                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">HealthCare Plus</p>
+                </div>
+              </div>
+            </ScrollAnimation>
+            <ScrollAnimation delay={250} animation="fade-in">
+              <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
+                <div className="text-center">
+                  <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-spots to-night-sky mb-3 flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">EL</span>
+                  </div>
+                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">EduLearn</p>
+                </div>
+              </div>
+            </ScrollAnimation>
+            <ScrollAnimation delay={100} animation="fade-in">
+              <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
+                <div className="text-center">
+                  <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-sun to-accent mb-3 flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">RM</span>
+                  </div>
+                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">RetailMax</p>
+                </div>
+              </div>
+            </ScrollAnimation>
+            <ScrollAnimation delay={150} animation="fade-in">
+              <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
+                <div className="text-center">
+                  <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-primary to-sky mb-3 flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">LS</span>
+                  </div>
+                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">LogiSmart</p>
+                </div>
+              </div>
+            </ScrollAnimation>
+            <ScrollAnimation delay={200} animation="fade-in">
+              <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
+                <div className="text-center">
+                  <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-accent to-primary mb-3 flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">MP</span>
+                  </div>
+                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">MediaPro</p>
+                </div>
+              </div>
+            </ScrollAnimation>
+            <ScrollAnimation delay={250} animation="fade-in">
+              <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
+                <div className="text-center">
+                  <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-sky to-accent mb-3 flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">SM</span>
+                  </div>
+                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">StartupMakers</p>
+                </div>
+              </div>
+            </ScrollAnimation>
           </div>
         </div>
       </section>
