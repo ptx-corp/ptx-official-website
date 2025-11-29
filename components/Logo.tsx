@@ -1,0 +1,13 @@
+import React from 'react';
+
+const Logo = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 967 406" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <path d="M0 404.487V92.7856H97.8598V202.244H145.702C168.19 202.591 178.585 199.519 192.82 187.746C221.091 160.925 219.452 117.064 192.248 92.7856H307.352C334.173 207.318 266.702 278.997 166.724 279.082H97.8598V404.487H0Z" fill="currentColor" className="text-primary dark:text-accent" />
+    <path d="M85.5368 0L7.2489 78.2879H333.058V404.487H428.409L427.684 78.2879H506.696L585.077 0H85.5368Z" fill="currentColor" className="text-primary dark:text-accent" />
+    <path d="M789.403 23.1965L807.525 1.44983H961.201L943.079 23.1965H789.403Z" fill="currentColor" className="text-accent dark:text-primary" />
+    <path d="M887.987 86.9866L924.956 44.2182H772.73L737.211 86.9866H887.987Z" fill="currentColor" className="text-accent dark:text-primary" />
+    <path d="M701.691 133.379L724.888 107.283H870.59L788.678 202.969L967 405.212H809.699L701.691 274.008L591.508 405.212H434.208L611.805 202.969L521.194 97.135L603.831 13.7729L701.691 133.379Z" fill="currentColor" className="text-accent dark:text-primary" />
+  </svg>
+);
+
+export default Logo;
