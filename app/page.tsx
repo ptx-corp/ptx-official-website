@@ -37,7 +37,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 dark:from-primary/10 dark:to-accent/10"></div>
         <div className="container mx-auto px-6 py-24 md:py-32 relative">
           <div className="flex flex-col items-center text-center gap-8 max-w-4xl mx-auto">
-            <div className="animate-fade-in relative w-[250px] md:w-[400px] h-auto">
+            <div className="animate-fade-in relative w-[180px] md:w-[280px] h-auto">
               {mounted && (
                 <img
                   src={resolvedTheme === 'dark' ? '/ptx-logo-dark.png' : '/ptx-logo-light.png'}
