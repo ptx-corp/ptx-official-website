@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "../components/theme-provider";
+import { ClientProviders } from "../components/client-providers";
 import { ThemeToggle } from "../components/theme-toggle";
 import { Navigation } from "../components/Navigation";
 
@@ -30,14 +30,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
+        <ClientProviders
           attribute="class"
           defaultTheme="system"
           enableSystem
         >
           <Navigation />
           {children}
-        </ThemeProvider>
+        </ClientProviders>
       </body>
     </html>
   );

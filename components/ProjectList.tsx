@@ -4,19 +4,25 @@ import { useState } from "react";
 import Link from "next/link";
 import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { Project } from "@/lib/api";
+import { useLanguage } from "../context/LanguageContext";
 
 interface ProjectListProps {
-    initialProjects: Project[];
+    initialProjects: {
+        en: Project[];
+        th: Project[];
+    };
 }
 
 const ITEMS_PER_PAGE = 6;
 
 export function ProjectList({ initialProjects }: ProjectListProps) {
     const [currentPage, setCurrentPage] = useState(1);
+    const { language } = useLanguage();
 
-    const totalPages = Math.ceil(initialProjects.length / ITEMS_PER_PAGE);
+    const projects = initialProjects[language] || initialProjects.en;
+    const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const currentProjects = initialProjects.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+    const currentProjects = projects.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);

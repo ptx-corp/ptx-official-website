@@ -1,0 +1,152 @@
+export const translations = {
+    en: {
+        nav: {
+            home: "Home",
+            services: "Services",
+            portfolio: "Portfolio",
+            press: "Press",
+            clients: "Clients",
+            contact: "Contact",
+        },
+        hero: {
+            title: "Building the Future with",
+            subtitle: "Innovation & Excellence",
+            description: "PT X is a technology company dedicated to creating innovative solutions that empower businesses and communities through cutting-edge software development.",
+            viewWork: "View Our Work",
+            contactUs: "Get In Touch",
+        },
+        stats: {
+            projects: "Projects Delivered",
+            clients: "Happy Clients",
+            years: "Years Experience",
+            team: "Team Members",
+        },
+        services: {
+            title: "Our Services",
+            subtitle: "We offer comprehensive technology solutions tailored to your business needs",
+            customSoftware: "Custom Software Development",
+            customSoftwareDesc: "Tailored software solutions designed to meet your unique business requirements and drive growth.",
+            webMobile: "Web & Mobile Applications",
+            webMobileDesc: "Responsive and performant applications that deliver exceptional user experiences across all devices.",
+            consulting: "Digital Consulting",
+            consultingDesc: "Strategic guidance to help you navigate digital transformation and leverage technology effectively.",
+            productDesign: "Product Design",
+            productDesignDesc: "User-centered design that creates intuitive and engaging digital products.",
+            cloudSolutions: "Cloud Solutions",
+            cloudSolutionsDesc: "Scalable cloud infrastructure and deployment strategies for modern applications.",
+            aiMl: "AI & Machine Learning",
+            aiMlDesc: "Intelligent solutions powered by artificial intelligence and advanced data analytics.",
+        },
+        portfolio: {
+            title: "Featured Projects",
+            subtitle: "Explore some of our recent work and success stories",
+            viewAll: "View All Projects",
+        },
+        press: {
+            title: "Press & Activities",
+            subtitle: "Latest news, events, and milestones from PT X",
+            viewAll: "View All Press Releases",
+            readMore: "Read More",
+            types: {
+                press: "Press Release",
+                award: "Award",
+                event: "Event",
+                partnership: "Partnership",
+                community: "Community",
+                media: "Media Coverage",
+            }
+        },
+        clients: {
+            title: "Our Clients",
+            subtitle: "Trusted by leading companies across various industries",
+        },
+        contact: {
+            title: "Ready to Start Your Next Project?",
+            description: "Let's discuss how we can help transform your ideas into reality. Our team is ready to bring your vision to life.",
+            email: "Email Us",
+            schedule: "Schedule a Call",
+        },
+        footer: {
+            rights: "© {year} PT X. All rights reserved.",
+            privacy: "Privacy",
+            terms: "Terms",
+            contact: "Contact",
+        }
+    },
+    th: {
+        nav: {
+            home: "หน้าหลัก",
+            services: "บริการ",
+            portfolio: "ผลงาน",
+            press: "ข่าวสาร",
+            clients: "ลูกค้า",
+            contact: "ติดต่อเรา",
+        },
+        hero: {
+            title: "สร้างสรรค์อนาคตด้วย",
+            subtitle: "นวัตกรรมและความเป็นเลิศ",
+            description: "PT X คือบริษัทเทคโนโลยีที่มุ่งมั่นสร้างสรรค์โซลูชันนวัตกรรมเพื่อเสริมศักยภาพธุรกิจและชุมชนผ่านการพัฒนาซอฟต์แวร์ที่ล้ำสมัย",
+            viewWork: "ดูผลงานของเรา",
+            contactUs: "ติดต่อเรา",
+        },
+        stats: {
+            projects: "โครงการที่ส่งมอบ",
+            clients: "ลูกค้าที่พึงพอใจ",
+            years: "ปีแห่งประสบการณ์",
+            team: "สมาชิกในทีม",
+        },
+        services: {
+            title: "บริการของเรา",
+            subtitle: "เรานำเสนอโซลูชันเทคโนโลยีครบวงจรที่ปรับให้เหมาะกับความต้องการทางธุรกิจของคุณ",
+            customSoftware: "การพัฒนาซอฟต์แวร์ตามความต้องการ",
+            customSoftwareDesc: "โซลูชันซอฟต์แวร์ที่ปรับแต่งเพื่อตอบโจทย์ทางธุรกิจและขับเคลื่อนการเติบโต",
+            webMobile: "เว็บและแอปพลิเคชันมือถือ",
+            webMobileDesc: "แอปพลิเคชันที่ตอบสนองรวดเร็วและมีประสิทธิภาพ มอบประสบการณ์ผู้ใช้ที่ยอดเยี่ยมบนทุกอุปกรณ์",
+            consulting: "ที่ปรึกษาด้านดิจิทัล",
+            consultingDesc: "คำแนะนำเชิงกลยุทธ์เพื่อช่วยคุณนำทางสู่การเปลี่ยนแปลงทางดิจิทัลและใช้ประโยชน์จากเทคโนโลยีอย่างมีประสิทธิภาพ",
+            productDesign: "การออกแบบผลิตภัณฑ์",
+            productDesignDesc: "การออกแบบที่ยึดผู้ใช้เป็นศูนย์กลาง สร้างสรรค์ผลิตภัณฑ์ดิจิทัลที่ใช้งานง่ายและน่าสนใจ",
+            cloudSolutions: "โซลูชันคลาวด์",
+            cloudSolutionsDesc: "โครงสร้างพื้นฐานคลาวด์ที่ปรับขนาดได้และกลยุทธ์การปรับใช้สำหรับแอปพลิเคชันสมัยใหม่",
+            aiMl: "AI และการเรียนรู้ของเครื่อง",
+            aiMlDesc: "โซลูชันอัจฉริยะที่ขับเคลื่อนด้วยปัญญาประดิษฐ์และการวิเคราะห์ข้อมูลขั้นสูง",
+        },
+        portfolio: {
+            title: "ผลงานเด่น",
+            subtitle: "สำรวจผลงานล่าสุดและความสำเร็จของเรา",
+            viewAll: "ดูโครงการทั้งหมด",
+        },
+        press: {
+            title: "ข่าวสารและกิจกรรม",
+            subtitle: "ข่าวล่าสุด กิจกรรม และความสำเร็จจาก PT X",
+            viewAll: "ดูข่าวประชาสัมพันธ์ทั้งหมด",
+            readMore: "อ่านเพิ่มเติม",
+            types: {
+                press: "ข่าวประชาสัมพันธ์",
+                award: "รางวัล",
+                event: "กิจกรรม",
+                partnership: "ความร่วมมือ",
+                community: "ชุมชน",
+                media: "สื่อมวลชน",
+            }
+        },
+        clients: {
+            title: "ลูกค้าของเรา",
+            subtitle: "ได้รับความไว้วางใจจากบริษัทชั้นนำในหลากหลายอุตสาหกรรม",
+        },
+        contact: {
+            title: "พร้อมเริ่มโครงการถัดไปของคุณหรือยัง?",
+            description: "มาคุยกันว่าเราจะช่วยเปลี่ยนไอเดียของคุณให้เป็นจริงได้อย่างไร ทีมงานของเราพร้อมที่จะทำให้วิสัยทัศน์ของคุณเป็นจริง",
+            email: "ส่งอีเมลหาเรา",
+            schedule: "นัดหมายการโทร",
+        },
+        footer: {
+            rights: "© {year} PT X. สงวนลิขสิทธิ์",
+            privacy: "นโยบายความเป็นส่วนตัว",
+            terms: "เงื่อนไขการใช้งาน",
+            contact: "ติดต่อ",
+        }
+    }
+};
+
+export type Language = 'en' | 'th';

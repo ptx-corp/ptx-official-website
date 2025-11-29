@@ -13,11 +13,20 @@ export interface Project {
     [key: string]: any;
     date: string;
   };
-  content: string; // This will now be HTML
+  content: string;
+}
+
+export interface LocalizedProject {
+  en: Project;
+  th: Project;
 }
 
 export function getProjectSlugs() {
-  const fileNames = fs.readdirSync(projectsDirectory);
+  // Read from 'en' as the source of truth for slugs
+  const enDir = path.join(projectsDirectory, 'en');
+  if (!fs.existsSync(enDir)) return [];
+
+  const fileNames = fs.readdirSync(enDir);
   return fileNames.map((fileName) => {
     return {
       params: {
@@ -27,9 +36,12 @@ export function getProjectSlugs() {
   });
 }
 
-export async function getProjectBySlug(slug: string): Promise<Project> {
-  const fullPath = path.join(projectsDirectory, `${slug}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+async function parseProjectFile(filePath: string, slug: string): Promise<Project> {
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`File not found: ${filePath}`);
+  }
+
+  const fileContents = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(fileContents);
 
   const processedContent = await remark().use(html).process(content);
@@ -45,25 +57,50 @@ export async function getProjectBySlug(slug: string): Promise<Project> {
   };
 }
 
-export async function getAllProjects(): Promise<Project[]> {
-  const fileNames = fs.readdirSync(projectsDirectory);
-  const allProjectsData = await Promise.all(fileNames.map(async (fileName) => {
+export async function getProjectBySlug(slug: string): Promise<LocalizedProject> {
+  const enPath = path.join(projectsDirectory, 'en', `${slug}.md`);
+  const thPath = path.join(projectsDirectory, 'th', `${slug}.md`);
+
+  // We assume EN always exists. TH might not, but for now we copied them so they do.
+  // In production, we might want a fallback if TH is missing.
+
+  const enProject = await parseProjectFile(enPath, slug);
+
+  let thProject: Project;
+  try {
+    thProject = await parseProjectFile(thPath, slug);
+  } catch (e) {
+    // Fallback to EN if TH is missing
+    thProject = { ...enProject };
+  }
+
+  return {
+    en: enProject,
+    th: thProject
+  };
+}
+
+export async function getAllProjects(): Promise<{ en: Project[], th: Project[] }> {
+  const enDir = path.join(projectsDirectory, 'en');
+  if (!fs.existsSync(enDir)) return { en: [], th: [] };
+
+  const fileNames = fs.readdirSync(enDir);
+
+  const allProjects = await Promise.all(fileNames.map(async (fileName) => {
     const slug = fileName.replace(/\.md$/, "");
     return getProjectBySlug(slug);
   }));
 
-  // Sort projects by date in descending order
-  // Sort projects: Featured first, then by date in descending order
-  return allProjectsData.sort((project1, project2) => {
-    // If one is featured and the other isn't, the featured one comes first
-    if (project1.frontmatter.featured && !project2.frontmatter.featured) {
-      return -1;
-    }
-    if (!project1.frontmatter.featured && project2.frontmatter.featured) {
-      return 1;
-    }
+  const sortProjects = (projects: Project[]) => {
+    return projects.sort((project1, project2) => {
+      if (project1.frontmatter.featured && !project2.frontmatter.featured) return -1;
+      if (!project1.frontmatter.featured && project2.frontmatter.featured) return 1;
+      return compareDesc(new Date(project1.frontmatter.date), new Date(project2.frontmatter.date));
+    });
+  };
 
-    // Otherwise, sort by date
-    return compareDesc(new Date(project1.frontmatter.date), new Date(project2.frontmatter.date));
-  });
+  return {
+    en: sortProjects(allProjects.map(p => p.en)),
+    th: sortProjects(allProjects.map(p => p.th))
+  };
 }
