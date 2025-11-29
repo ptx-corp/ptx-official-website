@@ -8,8 +8,10 @@ const rl = readline.createInterface({
 });
 
 const questions = [
-    { key: 'title', question: 'Project Title: ' },
-    { key: 'excerpt', question: 'Short Excerpt: ' },
+    { key: 'titleEn', question: 'Project Title (English): ' },
+    { key: 'titleTh', question: 'Project Title (Thai): ' },
+    { key: 'excerptEn', question: 'Short Excerpt (English): ' },
+    { key: 'excerptTh', question: 'Short Excerpt (Thai): ' },
     { key: 'tags', question: 'Tags (comma separated): ' },
     { key: 'coverImage', question: 'Cover Image Path (default: /projects/placeholder.jpg): ' },
     { key: 'featured', question: 'Featured? (y/N): ' }
@@ -32,8 +34,11 @@ const ask = (index) => {
 };
 
 const createProject = () => {
-    const title = projectData.title || 'Untitled Project';
-    const slug = title
+    const titleEn = projectData.titleEn || 'Untitled Project';
+    const titleTh = projectData.titleTh || titleEn; // Fallback to EN if empty
+
+    // Create slug from English title
+    const slug = titleEn
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/(^-|-$)+/g, '');
@@ -46,34 +51,49 @@ const createProject = () => {
     const coverImage = projectData.coverImage || '/projects/placeholder.jpg';
     const featured = projectData.featured.toLowerCase() === 'y';
 
-    const content = `---
+    // Template generator function
+    const generateContent = (title, excerpt, isThai = false) => `---
 title: '${title.replace(/'/g, "''")}'
 date: '${date}'
-excerpt: '${projectData.excerpt.replace(/'/g, "''")}'
+excerpt: '${excerpt.replace(/'/g, "''")}'
 coverImage: '${coverImage}'
 ${featured ? 'featured: true\n' : ''}tags: [${tags}]
 ---
 
-## Project Overview
+## ${isThai ? 'ภาพรวมโครงการ' : 'Project Overview'}
 
-Describe the project here...
+${isThai ? 'อธิบายโครงการที่นี่...' : 'Describe the project here...'}
 
-### Key Features
+### ${isThai ? 'คุณสมบัติหลัก' : 'Key Features'}
 
-*   Feature 1
-*   Feature 2
-*   Feature 3
+*   ${isThai ? 'คุณสมบัติ 1' : 'Feature 1'}
+*   ${isThai ? 'คุณสมบัติ 2' : 'Feature 2'}
+*   ${isThai ? 'คุณสมบัติ 3' : 'Feature 3'}
 
-### Technologies Used
+### ${isThai ? 'เทคโนโลยีที่ใช้' : 'Technologies Used'}
 
 *   Tech 1
 *   Tech 2
 `;
 
-    const filePath = path.join(__dirname, '..', '_projects', `${slug}.md`);
+    // Define paths
+    const enDir = path.join(__dirname, '..', '_projects', 'en');
+    const thDir = path.join(__dirname, '..', '_projects', 'th');
 
-    fs.writeFileSync(filePath, content);
-    console.log(`\n✅ Project created successfully at: _projects/${slug}.md`);
+    // Ensure directories exist
+    if (!fs.existsSync(enDir)) fs.mkdirSync(enDir, { recursive: true });
+    if (!fs.existsSync(thDir)) fs.mkdirSync(thDir, { recursive: true });
+
+    const enFilePath = path.join(enDir, `${slug}.md`);
+    const thFilePath = path.join(thDir, `${slug}.md`);
+
+    // Write files
+    fs.writeFileSync(enFilePath, generateContent(titleEn, projectData.excerptEn));
+    fs.writeFileSync(thFilePath, generateContent(titleTh, projectData.excerptTh, true));
+
+    console.log(`\n✅ Projects created successfully:`);
+    console.log(`   - EN: _projects/en/${slug}.md`);
+    console.log(`   - TH: _projects/th/${slug}.md`);
 };
 
 console.log('🚀 Generate New Project\n');

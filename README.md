@@ -1,15 +1,19 @@
 # PT X Official Website
 
-This is the official website for PT X, a technology company specializing in innovative software solutions. Built with [Next.js](https://nextjs.org) (App Router) and [Tailwind CSS](https://tailwindcss.com/), it features a dynamic project portfolio managed via Markdown files. The site is optimized for static HTML export, making it compatible with platforms like [Cloudflare Pages](https://pages.cloudflare.com/).
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+
+
+This is the official website for PT X, a technology company specializing in innovative software solutions. Built with [Next.js](https://nextjs.org) (App Router) and [Tailwind CSS](https://tailwindcss.com/), it features a dynamic project portfolio managed via Markdown files and full multilingual support (Thai/English). The site is optimized for static HTML export, making it compatible with platforms like [Cloudflare Pages](https://pages.cloudflare.com/).
 
 ## Features
 
+-   **Multilingual Support:** Full support for Thai (Default) and English languages with a custom context provider and switcher.
 -   **Next.js App Router:** Modern React framework for building performant web applications.
 -   **Tailwind CSS:** Utility-first CSS framework for rapid, responsive UI development.
--   **Dynamic Portfolio:** Manage projects using Markdown files with Frontmatter.
+-   **Dynamic Portfolio:** Manage projects using Markdown files with Frontmatter, supporting localized content.
 -   **Featured Projects:** Pin important projects to the home page using a simple flag.
 -   **Pagination:** Automatically paginated project listing page (`/projects`).
--   **CLI Generator:** Built-in script to easily generate new project files.
+-   **CLI Generator:** Built-in script to easily generate new project files for both languages simultaneously.
 -   **Static Export:** Configured for static HTML export (`output: 'export'`).
 -   **Dark Mode:** Built-in dark/light mode support using `next-themes`.
 
@@ -31,7 +35,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Managing Projects
 
-Projects are stored as Markdown files in the `_projects/` directory. Each file contains frontmatter for metadata and the main content.
+Projects are stored as Markdown files in the `_projects/` directory, organized by language.
+
+-   `_projects/en/`: English versions of project files.
+-   `_projects/th/`: Thai versions of project files.
 
 ### Creating a New Project
 
@@ -41,7 +48,12 @@ You can easily create a new project using the included CLI script:
 npm run new-project
 ```
 
-Follow the prompts to enter the project title, excerpt, tags, and cover image. The script will generate a new `.md` file with the correct format.
+Follow the prompts to enter:
+1.  **Project Title (English & Thai)**
+2.  **Short Excerpt (English & Thai)**
+3.  **Tags & Cover Image** (Shared)
+
+The script will automatically generate two `.md` files (one in `en/` and one in `th/`) with the correct format and templates.
 
 ### Project Frontmatter
 
@@ -90,9 +102,10 @@ The static files will be generated in the `out` directory. You can deploy this d
 ## Project Structure
 
 *   `app/`: Next.js App Router pages and API routes.
-*   `components/`: Reusable React components (Navigation, ProjectList, etc.).
-*   `lib/`: Utility functions (Markdown parsing, API logic).
-*   `_projects/`: Markdown source files for portfolio projects.
+*   `components/`: Reusable React components (Navigation, ProjectList, LanguageSwitcher, etc.).
+*   `context/`: React Context providers (LanguageContext).
+*   `lib/`: Utility functions (Markdown parsing, API logic, Translations).
+*   `_projects/`: Markdown source files for portfolio projects (split into `en` and `th`).
 *   `public/`: Static assets (images, logos).
 *   `scripts/`: Utility scripts (project generator).
 

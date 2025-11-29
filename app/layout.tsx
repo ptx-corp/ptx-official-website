@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PTX Official Website",
-  description: "The official website for PTX Co., Ltd., showcasing our open-source projects and initiatives.",
+  title: "PT X - สร้างสรรค์อนาคตด้วยนวัตกรรม",
+  description: "เว็บไซต์อย่างเป็นทางการของ PT X จำกัด แสดงผลงานและโครงการโอเพ่นซอร์สของเรา",
 };
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
+    <html lang="th" suppressHydrationWarning={true}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

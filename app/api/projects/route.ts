@@ -5,6 +5,9 @@ export const dynamic = 'force-static';
 
 export async function GET() {
     const projects = await getAllProjects();
-    const featuredProjects = projects.slice(0, 3);
+    const featuredProjects = {
+        en: projects.en.slice(0, 3),
+        th: projects.th.slice(0, 3)
+    };
     return NextResponse.json(featuredProjects);
 }
