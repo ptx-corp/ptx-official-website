@@ -6,14 +6,29 @@ import { ArrowRight, Code, Sparkles, Users, Award, MessageCircle, Mail, Newspape
 import { ScrollAnimation } from "../components/ScrollAnimation";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { useCountAnimation } from "../hooks/useCountAnimation";
 
 export default function Home() {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [animationTrigger, setAnimationTrigger] = useState(0);
+
+  // Animated counters - re-trigger on theme change
+  const projectsCount = useCountAnimation(50, 2000, mounted ? animationTrigger : false);
+  const clientsCount = useCountAnimation(30, 2000, mounted ? animationTrigger : false);
+  const yearsCount = useCountAnimation(8, 2000, mounted ? animationTrigger : false);
+  const teamCount = useCountAnimation(15, 2000, mounted ? animationTrigger : false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Trigger animation on theme change
+  useEffect(() => {
+    if (mounted) {
+      setAnimationTrigger(prev => prev + 1);
+    }
+  }, [resolvedTheme, mounted]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -70,20 +85,20 @@ export default function Home() {
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <ScrollAnimation delay={100} animation="scale-in" className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-primary dark:text-accent mb-2">50+</div>
-                <div className="text-sm md:text-base text-primary/80 dark:text-white/80 font-medium">Projects Delivered</div>
+                <div className="text-4xl md:text-5xl font-bold text-primary dark:text-accent mb-2">{projectsCount}+</div>
+                <div className="text-sm md:text-base text-foreground/80 font-medium">Projects Delivered</div>
               </ScrollAnimation>
               <ScrollAnimation delay={200} animation="scale-in" className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-primary dark:text-accent mb-2">30+</div>
-                <div className="text-sm md:text-base text-primary/80 dark:text-white/80 font-medium">Happy Clients</div>
+                <div className="text-4xl md:text-5xl font-bold text-primary dark:text-accent mb-2">{clientsCount}+</div>
+                <div className="text-sm md:text-base text-foreground/80 font-medium">Happy Clients</div>
               </ScrollAnimation>
               <ScrollAnimation delay={300} animation="scale-in" className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-primary dark:text-accent mb-2">8+</div>
-                <div className="text-sm md:text-base text-primary/80 dark:text-white/80 font-medium">Years Experience</div>
+                <div className="text-4xl md:text-5xl font-bold text-primary dark:text-accent mb-2">{yearsCount}+</div>
+                <div className="text-sm md:text-base text-foreground/80 font-medium">Years Experience</div>
               </ScrollAnimation>
               <ScrollAnimation delay={400} animation="scale-in" className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-primary dark:text-accent mb-2">15+</div>
-                <div className="text-sm md:text-base text-primary/80 dark:text-white/80 font-medium">Team Members</div>
+                <div className="text-4xl md:text-5xl font-bold text-primary dark:text-accent mb-2">{teamCount}+</div>
+                <div className="text-sm md:text-base text-foreground/80 font-medium">Team Members</div>
               </ScrollAnimation>
             </div>
           </div>
