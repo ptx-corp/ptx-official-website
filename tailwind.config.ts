@@ -11,9 +11,22 @@ const config: Config = {
     extend: {
       colors: {
         primary: '#0A2342',
-        accent: '#B4975A',
+        accent: {
+          DEFAULT: '#B4975A',
+          light: '#B4975A',
+          dark: '#FFC107',
+        },
         'accent-foreground': '#FFFFFF',
         ring: '#B4975A',
+        // Style guide colors
+        sun: '#E8C849',
+        sky: '#117AF5',
+        clouds: '#FFFFFF',
+        moon: '#C9C9C9',
+        spots: '#889399',
+        'night-sky': '#252D37',
+        stars: '#FFFFFF',
+        gold: '#FFC107',
       },
     },
   },
