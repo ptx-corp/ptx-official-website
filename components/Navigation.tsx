@@ -28,6 +28,7 @@ export function Navigation() {
     { href: "/#portfolio", label: t.nav.portfolio },
     { href: "/#press", label: t.nav.press },
     { href: "/#clients", label: t.nav.clients },
+    { href: "https://shop.ptx.co.th", label: t.nav.shop, external: true },
     { href: "/#contact", label: t.nav.contact },
   ];
 
@@ -55,6 +56,8 @@ export function Navigation() {
               <Link
                 key={link.href}
                 href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
                 className="text-sm font-semibold text-foreground hover:text-accent transition-colors"
               >
                 {link.label}
@@ -97,6 +100,8 @@ export function Navigation() {
                 key={link.href}
                 href={link.href}
                 onClick={handleLinkClick}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
                 className="text-base font-semibold text-foreground hover:text-accent transition-all py-2 animate-fade-in-up"
                 style={{ animationDelay: `${index * 50}ms` }}
               >

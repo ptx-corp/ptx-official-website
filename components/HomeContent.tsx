@@ -439,8 +439,16 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
       <section id="clients" className="py-24 bg-zinc-50 dark:bg-zinc-900/50 scroll-mt-20">
         <div className="container mx-auto px-6">
           <ScrollAnimation animation="fade-in-up" className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">{t.clients.title}</h2>
-            <p className="text-lg text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto">
+            <h2
+              className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
+              style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
+            >
+              {t.clients.title}
+            </h2>
+            <p
+              className="text-lg max-w-2xl mx-auto"
+              style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : 'rgba(10,35,66,0.8)' }}
+            >
               {t.clients.subtitle}
             </p>
           </ScrollAnimation>
@@ -451,9 +459,19 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
               <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
                 <div className="text-center">
                   <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-primary to-accent mb-3 flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">TC</span>
+                    <span
+                      className="font-bold text-xl"
+                      style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
+                    >
+                      TC
+                    </span>
                   </div>
-                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">TechCorp Global</p>
+                  <p
+                    className="text-sm font-semibold"
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                  >
+                    TechCorp Global
+                  </p>
                 </div>
               </div>
             </ScrollAnimation>
@@ -461,9 +479,19 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
               <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
                 <div className="text-center">
                   <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-accent to-sun mb-3 flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">FI</span>
+                    <span
+                      className="font-bold text-xl"
+                      style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
+                    >
+                      FI
+                    </span>
                   </div>
-                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">FinanceInc</p>
+                  <p
+                    className="text-sm font-semibold"
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                  >
+                    FinanceInc
+                  </p>
                 </div>
               </div>
             </ScrollAnimation>
@@ -471,9 +499,19 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
               <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
                 <div className="text-center">
                   <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-sky to-primary mb-3 flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">HC</span>
+                    <span
+                      className="font-bold text-xl"
+                      style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
+                    >
+                      HC
+                    </span>
                   </div>
-                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">HealthCare Plus</p>
+                  <p
+                    className="text-sm font-semibold"
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                  >
+                    HealthCare Plus
+                  </p>
                 </div>
               </div>
             </ScrollAnimation>
@@ -481,9 +519,19 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
               <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
                 <div className="text-center">
                   <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-spots to-night-sky mb-3 flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">EL</span>
+                    <span
+                      className="font-bold text-xl"
+                      style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
+                    >
+                      EL
+                    </span>
                   </div>
-                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">EduLearn</p>
+                  <p
+                    className="text-sm font-semibold"
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                  >
+                    EduLearn
+                  </p>
                 </div>
               </div>
             </ScrollAnimation>
@@ -491,9 +539,19 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
               <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
                 <div className="text-center">
                   <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-sun to-accent mb-3 flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">RM</span>
+                    <span
+                      className="font-bold text-xl"
+                      style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
+                    >
+                      RM
+                    </span>
                   </div>
-                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">RetailMax</p>
+                  <p
+                    className="text-sm font-semibold"
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                  >
+                    RetailMax
+                  </p>
                 </div>
               </div>
             </ScrollAnimation>
@@ -501,9 +559,19 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
               <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
                 <div className="text-center">
                   <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-primary to-sky mb-3 flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">LS</span>
+                    <span
+                      className="font-bold text-xl"
+                      style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
+                    >
+                      LS
+                    </span>
                   </div>
-                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">LogiSmart</p>
+                  <p
+                    className="text-sm font-semibold"
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                  >
+                    LogiSmart
+                  </p>
                 </div>
               </div>
             </ScrollAnimation>
@@ -511,9 +579,19 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
               <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
                 <div className="text-center">
                   <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-accent to-primary mb-3 flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">MP</span>
+                    <span
+                      className="font-bold text-xl"
+                      style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
+                    >
+                      MP
+                    </span>
                   </div>
-                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">MediaPro</p>
+                  <p
+                    className="text-sm font-semibold"
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                  >
+                    MediaPro
+                  </p>
                 </div>
               </div>
             </ScrollAnimation>
@@ -521,9 +599,19 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
               <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
                 <div className="text-center">
                   <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-sky to-accent mb-3 flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">SM</span>
+                    <span
+                      className="font-bold text-xl"
+                      style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
+                    >
+                      SM
+                    </span>
                   </div>
-                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">StartupMakers</p>
+                  <p
+                    className="text-sm font-semibold"
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                  >
+                    StartupMakers
+                  </p>
                 </div>
               </div>
             </ScrollAnimation>
@@ -532,50 +620,66 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
       </section>
 
       {/* Contact/CTA Section */}
-      <section id="contact" className="py-24 bg-primary dark:bg-night-sky scroll-mt-20">
+      <section
+        id="contact"
+        className="py-24 scroll-mt-20"
+        style={{ backgroundColor: mounted && resolvedTheme === 'dark' ? '#0A2342' : '#ffffff' }}
+      >
         <div className="container mx-auto px-6">
           <ScrollAnimation animation="fade-in-up" className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2
+              className="text-3xl md:text-4xl font-bold mb-6"
+              style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
+            >
               {t.contact.title}
             </h2>
-            <p className="text-lg text-white/80 mb-8">
+            <p
+              className="text-lg mb-8"
+              style={{ color: mounted && resolvedTheme === 'dark' ? 'rgba(255,255,255,0.8)' : 'rgba(10,35,66,0.8)' }}
+            >
               {t.contact.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="mailto:hello@ptx.com"
+                href="mailto:info@ptx.co.th"
                 className="px-8 py-3 bg-accent text-accent-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity inline-flex items-center justify-center gap-2"
               >
                 <Mail className="w-5 h-5" />
                 {t.contact.email}
               </a>
               <a
-                href="tel:+1234567890"
+                href="tel:+6621620878"
                 className="px-8 py-3 border-2 border-accent text-accent rounded-lg font-semibold hover:bg-accent/10 transition-colors inline-flex items-center justify-center gap-2"
               >
                 {t.contact.schedule}
               </a>
             </div>
-            <div className="mt-12 pt-12 border-t border-white/20">
-              <div className="flex flex-col md:flex-row justify-center items-center gap-6 text-white/60">
+            <div
+              className="mt-12 pt-12 border-t"
+              style={{ borderColor: mounted && resolvedTheme === 'dark' ? 'rgba(255,255,255,0.2)' : 'rgba(10,35,66,0.2)' }}
+            >
+              <div
+                className="flex flex-col md:flex-row flex-wrap justify-center items-center gap-6 text-sm md:text-base"
+                style={{ color: mounted && resolvedTheme === 'dark' ? 'rgba(255,255,255,0.6)' : 'rgba(10,35,66,0.6)' }}
+              >
                 <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4" />
-                  <span>hello@ptx.com</span>
+                  <Mail className="w-4 h-4 shrink-0" />
+                  <span className="whitespace-nowrap">{t.contact.info}</span>
                 </div>
                 <div className="hidden md:block">•</div>
                 <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  <span>+1 (234) 567-890</span>
+                  <span className="whitespace-nowrap">{t.contact.phone}</span>
                 </div>
                 <div className="hidden md:block">•</div>
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center gap-2 max-w-[300px] md:max-w-none text-center md:text-left">
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span>Jakarta, Indonesia</span>
+                  <span>{t.contact.address}</span>
                 </div>
               </div>
             </div>
@@ -584,7 +688,7 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-background border-t border-zinc-200 dark:border-zinc-800">
+      < footer className="py-8 bg-background border-t border-zinc-200 dark:border-zinc-800" >
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <Logo className="w-24 h-auto" />
@@ -604,7 +708,7 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
             </div>
           </div>
         </div>
-      </footer>
+      </footer >
 
     </div >
   );

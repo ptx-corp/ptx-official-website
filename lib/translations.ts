@@ -6,6 +6,7 @@ export const translations = {
             portfolio: "Portfolio",
             press: "Press",
             clients: "Clients",
+            shop: "Shop",
             contact: "Contact",
         },
         hero: {
@@ -65,6 +66,9 @@ export const translations = {
             description: "Let's discuss how we can help transform your ideas into reality. Our team is ready to bring your vision to life.",
             email: "Email Us",
             schedule: "Schedule a Call",
+            info: "info@ptx.co.th",
+            phone: "+66 2-162-0878",
+            address: "111/6, Lat Phrao 23, Chandrakasem, Chatuchak, Bangkok, 10900",
         },
         footer: {
             rights: "© {year} PT X. All rights reserved.",
@@ -80,6 +84,7 @@ export const translations = {
             portfolio: "ผลงาน",
             press: "ข่าวสาร",
             clients: "ลูกค้า",
+            shop: "ร้านค้า",
             contact: "ติดต่อเรา",
         },
         hero: {
@@ -139,6 +144,9 @@ export const translations = {
             description: "มาคุยกันว่าเราจะช่วยเปลี่ยนไอเดียของคุณให้เป็นจริงได้อย่างไร ทีมงานของเราพร้อมที่จะทำให้วิสัยทัศน์ของคุณเป็นจริง",
             email: "ส่งอีเมลหาเรา",
             schedule: "นัดหมายการโทร",
+            info: "info@ptx.co.th",
+            phone: "+66 2-162-0878",
+            address: "111/6 ซอย ลาดพร้าว 23 แขวงจันทรเกษม เขตจตุจักร กรุงเทพฯ 10900",
         },
         footer: {
             rights: "© {year} PT X. สงวนลิขสิทธิ์",
