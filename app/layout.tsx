@@ -5,6 +5,8 @@ import { ClientProviders } from "../components/client-providers";
 import { ThemeToggle } from "../components/theme-toggle";
 import { Navigation } from "../components/Navigation";
 
+import { NotificationWrapper } from "../components/NotificationWrapper";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -35,6 +37,7 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
         >
+          <NotificationWrapper />
           <Navigation />
           {children}
         </ClientProviders>

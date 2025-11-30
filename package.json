@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "new-project": "node scripts/generate-project.js",
-    "new-press": "node scripts/generate-press.js"
+    "new-press": "node scripts/generate-press.js",
+    "manage-notification": "node scripts/manage-notification.js"
   },
   "dependencies": {
     "date-fns": "^4.1.0",
