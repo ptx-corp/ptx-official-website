@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Calendar, ChevronLeft, ChevronRight, ExternalLink, Newspaper, Award, Users, Sparkles, Pin } from "lucide-react";
 import { PressItem } from "@/lib/api";
 import { useLanguage } from "../context/LanguageContext";
+import { useTheme } from "next-themes";
 
 interface PressListProps {
     initialPress: {
@@ -31,6 +32,12 @@ export function PressList({ initialPress }: PressListProps) {
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
     const { t, language } = useLanguage();
+    const { resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const pressItems = initialPress[language] || initialPress.en;
 
@@ -83,13 +90,16 @@ export function PressList({ initialPress }: PressListProps) {
                         <Link href={`/press/${item.slug}`} key={index} className="block h-full">
                             <article className="group !bg-white rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-200 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg h-full flex flex-col relative">
                                 {item.frontmatter.pinned && (
-                                    <div className="absolute top-0 right-0 bg-accent text-accent-foreground px-3 py-1 rounded-bl-lg shadow-sm z-10 flex items-center gap-1">
+                                    <div className="absolute top-0 right-0 bg-accent text-[#0A2342] px-3 py-1 rounded-bl-lg shadow-sm z-10 flex items-center gap-1">
                                         <Pin className="w-3 h-3 fill-current" />
                                         <span className="text-[10px] font-bold uppercase">Pinned</span>
                                     </div>
                                 )}
                                 <div className="p-6 flex-1 flex flex-col">
-                                    <div className="flex items-center gap-2 text-sm text-accent dark:text-[#0A2342] mb-3">
+                                    <div
+                                        className="flex items-center gap-2 text-sm mb-3"
+                                        style={{ color: mounted && resolvedTheme === 'dark' ? '#0A2342' : 'var(--accent)' }}
+                                    >
                                         <Icon className="w-4 h-4" />
                                         <span className="font-semibold">{t.press.types[item.frontmatter.category as keyof typeof t.press.types]}</span>
                                     </div>
