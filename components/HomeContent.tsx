@@ -622,10 +622,12 @@ export default function HomeContent({ projects: initialProjects, press: initialP
       < footer className="py-8 bg-background border-t border-zinc-200 dark:border-zinc-800" >
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <Logo className="w-24 h-auto" />
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
-              {t.footer.rights.replace('{year}', new Date().getFullYear().toString())}
-            </p>
+            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+              <Logo className="w-24 h-auto" />
+              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                {t.footer.rights.replace('{year}', new Date().getFullYear().toString())}
+              </p>
+            </div>
             <div className="flex gap-6">
               <Link href="/privacy" className="text-zinc-600 dark:text-zinc-400 hover:text-accent transition-colors">
                 {t.footer.privacy}
@@ -633,9 +635,6 @@ export default function HomeContent({ projects: initialProjects, press: initialP
               <Link href="/terms" className="text-zinc-600 dark:text-zinc-400 hover:text-accent transition-colors">
                 {t.footer.terms}
               </Link>
-              <a href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-accent transition-colors">
-                {t.footer.contact}
-              </a>
             </div>
           </div>
         </div>
