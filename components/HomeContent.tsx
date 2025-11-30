@@ -627,12 +627,12 @@ export default function HomeContent({ projects: initialProjects, press: initialP
               {t.footer.rights.replace('{year}', new Date().getFullYear().toString())}
             </p>
             <div className="flex gap-6">
-              <a href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-accent transition-colors">
+              <Link href="/privacy" className="text-zinc-600 dark:text-zinc-400 hover:text-accent transition-colors">
                 {t.footer.privacy}
-              </a>
-              <a href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-accent transition-colors">
+              </Link>
+              <Link href="/terms" className="text-zinc-600 dark:text-zinc-400 hover:text-accent transition-colors">
                 {t.footer.terms}
-              </a>
+              </Link>
               <a href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-accent transition-colors">
                 {t.footer.contact}
               </a>

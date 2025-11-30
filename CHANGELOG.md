@@ -29,6 +29,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Configurable via `config/notification.json` or CLI (`npm run manage-notification`).
     - Dismissible by user (persists per session).
   - Scroll animations and hover effects.
+- **Legal & Compliance**:
+  - **Privacy Policy**: Bilingual page (`/privacy`) compliant with PDPA/GDPR (Data Controller/Processor, International Transfer).
+  - **Terms of Use**: Bilingual page (`/terms`) covering IP, liability, and external links.
+  - **Footer Links**: Direct access to legal pages.
 - **SEO & Performance**:
   - Static HTML export configuration (`output: 'export'`).
   - Metadata and OpenGraph tags.
