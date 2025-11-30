@@ -136,6 +136,36 @@ Content goes here...
 *   **category**: The type of item. Options: `press`, `award`, `event`, `partnership`, `community`, `media`.
 *   **pinned**: Set to `true` to pin this item to the top of the list.
 
+## Sticky Notification Bar
+
+The website features a global sticky notification bar at the top of the page, useful for announcements or development status.
+
+### Managing the Notification Bar
+
+You can easily manage the notification bar (toggle on/off, change message, update colors) using the CLI script:
+
+```bash
+npm run manage-notification
+```
+
+Follow the interactive prompts to:
+1.  **Toggle On/Off**: Enable or disable the bar.
+2.  **Change Message**: Update the text displayed.
+3.  **Change Colors**: Customize the background and text colors.
+
+### Configuration
+
+The configuration is stored in `config/notification.json`. You can also edit this file manually:
+
+```json
+{
+  "enabled": true,
+  "message": "Your message here...",
+  "backgroundColor": "#ef4444",
+  "textColor": "#ffffff"
+}
+```
+
 ## Building for Production
 
 To build the application for production (static HTML export):
@@ -150,6 +180,7 @@ The static files will be generated in the `out` directory. You can deploy this d
 
 *   `app/`: Next.js App Router pages and API routes.
 *   `components/`: Reusable React components (Navigation, ProjectList, LanguageSwitcher, etc.).
+*   `config/`: Configuration files (notification settings).
 *   `context/`: React Context providers (LanguageContext).
 *   `lib/`: Utility functions (Markdown parsing, API logic, Translations).
 *   `_projects/`: Markdown source files for portfolio projects (split into `en` and `th`).
