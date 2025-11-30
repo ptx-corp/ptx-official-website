@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PT X - สร้างสรรค์อนาคตด้วยนวัตกรรม",
+  title: "PT X - พีที เอกซ์",
   description: "เว็บไซต์อย่างเป็นทางการของ PT X จำกัด แสดงผลงานและโครงการโอเพ่นซอร์สของเรา",
 };
 
