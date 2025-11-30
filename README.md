@@ -89,6 +89,53 @@ The Home page displays the top 3 projects. Projects marked with `featured: true`
 
 The `/projects` page lists all projects with pagination (6 projects per page).
 
+## Managing Press & Activities
+
+Press releases, awards, and events are stored as Markdown files in the `_press/` directory, organized by language.
+
+-   `_press/en/`: English versions of press items.
+-   `_press/th/`: Thai versions of press items.
+
+### Creating a New Press Item
+
+You can easily create a new press release or activity using the included CLI script:
+
+```bash
+npm run new-press
+```
+
+Follow the prompts to enter:
+1.  **Title (English & Thai)**
+2.  **Short Description (English & Thai)**
+3.  **Category** (press, award, event, partnership, community, media)
+4.  **Date & Pinned Status**
+
+The script will automatically generate two `.md` files (one in `en/` and one in `th/`) with the correct format and templates.
+
+### Press Frontmatter
+
+A typical press file looks like this:
+
+```markdown
+---
+title: "Named 'Best Tech Startup 2024'"
+description: "PT X recognized for outstanding innovation."
+date: "2024-10-28"
+category: "award"
+pinned: true
+---
+
+# Title Here
+
+Content goes here...
+```
+
+*   **title**: The headline of the press release or activity.
+*   **description**: A short summary displayed on the card.
+*   **date**: The publication or event date (YYYY-MM-DD).
+*   **category**: The type of item. Options: `press`, `award`, `event`, `partnership`, `community`, `media`.
+*   **pinned**: Set to `true` to pin this item to the top of the list.
+
 ## Building for Production
 
 To build the application for production (static HTML export):
@@ -106,6 +153,7 @@ The static files will be generated in the `out` directory. You can deploy this d
 *   `context/`: React Context providers (LanguageContext).
 *   `lib/`: Utility functions (Markdown parsing, API logic, Translations).
 *   `_projects/`: Markdown source files for portfolio projects (split into `en` and `th`).
+*   `_press/`: Markdown source files for press & activities (split into `en` and `th`).
 *   `public/`: Static assets (images, logos).
 *   `scripts/`: Utility scripts (project generator).
 

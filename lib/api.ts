@@ -104,3 +104,102 @@ export async function getAllProjects(): Promise<{ en: Project[], th: Project[] }
     th: sortProjects(allProjects.map(p => p.th))
   };
 }
+
+const pressDirectory = path.join(process.cwd(), "_press");
+
+export interface PressItem {
+  slug: string;
+  frontmatter: {
+    title: string;
+    description: string;
+    date: string;
+    category: 'press' | 'award' | 'event' | 'partnership' | 'community' | 'media';
+    pinned?: boolean;
+    [key: string]: any;
+  };
+  content: string;
+}
+
+export interface LocalizedPressItem {
+  en: PressItem;
+  th: PressItem;
+}
+
+async function parsePressFile(filePath: string, slug: string): Promise<PressItem> {
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`File not found: ${filePath}`);
+  }
+
+  const fileContents = fs.readFileSync(filePath, "utf8");
+  const { data, content } = matter(fileContents);
+
+  const processedContent = await remark().use(html).process(content);
+  const contentHtml = processedContent.toString();
+
+  return {
+    slug,
+    frontmatter: {
+      ...data,
+      date: data.date.toString(),
+    } as PressItem['frontmatter'],
+    content: contentHtml,
+  };
+}
+
+export function getPressSlugs() {
+  const enDir = path.join(pressDirectory, 'en');
+  if (!fs.existsSync(enDir)) return [];
+
+  const fileNames = fs.readdirSync(enDir);
+  return fileNames.map((fileName) => {
+    return {
+      params: {
+        slug: fileName.replace(/\.md$/, ""),
+      },
+    };
+  });
+}
+
+export async function getPressBySlug(slug: string): Promise<LocalizedPressItem> {
+  const enPath = path.join(pressDirectory, 'en', `${slug}.md`);
+  const thPath = path.join(pressDirectory, 'th', `${slug}.md`);
+
+  const enPress = await parsePressFile(enPath, slug);
+
+  let thPress: PressItem;
+  try {
+    thPress = await parsePressFile(thPath, slug);
+  } catch (e) {
+    thPress = { ...enPress };
+  }
+
+  return {
+    en: enPress,
+    th: thPress
+  };
+}
+
+export async function getAllPress(): Promise<{ en: PressItem[], th: PressItem[] }> {
+  const enDir = path.join(pressDirectory, 'en');
+  if (!fs.existsSync(enDir)) return { en: [], th: [] };
+
+  const fileNames = fs.readdirSync(enDir);
+
+  const allPress = await Promise.all(fileNames.map(async (fileName) => {
+    const slug = fileName.replace(/\.md$/, "");
+    return getPressBySlug(slug);
+  }));
+
+  const sortPress = (items: PressItem[]) => {
+    return items.sort((a, b) => {
+      if (a.frontmatter.pinned && !b.frontmatter.pinned) return -1;
+      if (!a.frontmatter.pinned && b.frontmatter.pinned) return 1;
+      return compareDesc(new Date(a.frontmatter.date), new Date(b.frontmatter.date));
+    });
+  };
+
+  return {
+    en: sortPress(allPress.map(p => p.en)),
+    th: sortPress(allPress.map(p => p.th))
+  };
+}

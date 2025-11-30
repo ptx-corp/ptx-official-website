@@ -12,11 +12,11 @@ const config: Config = {
       colors: {
         primary: '#0A2342',
         accent: {
-          DEFAULT: '#B4975A',
+          DEFAULT: 'var(--accent)',
           light: '#B4975A',
           dark: '#FFC107',
         },
-        'accent-foreground': '#FFFFFF',
+        'accent-foreground': 'var(--accent-foreground)',
         ring: '#B4975A',
         // Style guide colors
         sun: '#E8C849',

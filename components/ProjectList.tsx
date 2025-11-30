@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
+import { Calendar, ChevronLeft, ChevronRight, Pin } from "lucide-react";
 import { Project } from "@/lib/api";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -33,7 +33,13 @@ export function ProjectList({ initialProjects }: ProjectListProps) {
         <>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                 {currentProjects.map((project) => (
-                    <Link href={`/projects/${project.slug}`} key={project.slug} className="group bg-background rounded-xl overflow-hidden border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-xl flex flex-col">
+                    <Link href={`/projects/${project.slug}`} key={project.slug} className="group bg-background rounded-xl overflow-hidden border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-xl flex flex-col relative">
+                        {project.frontmatter.featured && (
+                            <div className="absolute top-0 right-0 bg-accent text-accent-foreground px-3 py-1 rounded-bl-lg shadow-sm z-20 flex items-center gap-1">
+                                <Pin className="w-3 h-3 fill-current" />
+                                <span className="text-[10px] font-bold uppercase">Featured</span>
+                            </div>
+                        )}
                         <div className="aspect-video relative overflow-hidden bg-zinc-100 dark:bg-zinc-800">
                             {project.frontmatter.coverImage ? (
                                 <img

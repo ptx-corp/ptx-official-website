@@ -4,12 +4,14 @@
   --background: #ffffff;
   --foreground: #0A2342; /* PTX Dark Blue */
   --accent: #B4975A; /* PTX Gold/Tan */
+  --accent-foreground: #0A2342; /* PTX Dark Blue */
 }
 
 .dark {
   --background: #0A2342; /* PTX Dark Blue */
   --foreground: #ffffff;
   --accent: #FFC107; /* Brighter Vibrant Gold */
+  --accent-foreground: #0A2342; /* PTX Dark Blue */
 }
 
 @theme inline {

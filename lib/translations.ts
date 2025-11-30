@@ -48,6 +48,7 @@ export const translations = {
             subtitle: "Latest news, events, and milestones from PT X",
             viewAll: "View All Press Releases",
             readMore: "Read More",
+            all: "All",
             types: {
                 press: "Press Release",
                 award: "Award",
@@ -126,6 +127,7 @@ export const translations = {
             subtitle: "ข่าวล่าสุด กิจกรรม และความสำเร็จจาก PT X",
             viewAll: "ดูข่าวประชาสัมพันธ์ทั้งหมด",
             readMore: "อ่านเพิ่มเติม",
+            all: "ทั้งหมด",
             types: {
                 press: "ข่าวประชาสัมพันธ์",
                 award: "รางวัล",

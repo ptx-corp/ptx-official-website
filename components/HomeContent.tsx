@@ -10,16 +10,32 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { useCountAnimation } from "../hooks/useCountAnimation";
 import { useLanguage } from "../context/LanguageContext";
-import { Project } from "../lib/api";
+import { Project, PressItem } from "../lib/api";
+
+const getCategoryIcon = (category: PressItem['frontmatter']['category']) => {
+  switch (category) {
+    case 'press': return Newspaper;
+    case 'award': return Award;
+    case 'event': return Users;
+    case 'partnership': return Sparkles;
+    case 'community': return Users;
+    case 'media': return Newspaper;
+    default: return Newspaper;
+  }
+};
 
 interface HomeContentProps {
   projects: {
     en: Project[];
     th: Project[];
   };
+  press: {
+    en: PressItem[];
+    th: PressItem[];
+  };
 }
 
-export default function HomeContent({ projects: initialProjects }: HomeContentProps) {
+export default function HomeContent({ projects: initialProjects, press: initialPress }: HomeContentProps) {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [animationTrigger, setAnimationTrigger] = useState(0);
@@ -27,6 +43,9 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
 
   // Get projects for current language, fallback to EN if empty (though API ensures structure)
   const projects = (initialProjects[language] || initialProjects.en).slice(0, 3);
+
+  // Get press items for current language
+  const pressItems = (initialPress[language] || initialPress.en).slice(0, 6);
 
   // Animated counters - re-trigger on theme change
   const projectsCount = useCountAnimation(50, 2000, mounted ? animationTrigger : false);
@@ -200,7 +219,11 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="py-24 bg-zinc-50 dark:bg-zinc-900/50 scroll-mt-20">
+      <section
+        id="portfolio"
+        className="py-24 bg-zinc-50 scroll-mt-20"
+        style={{ backgroundColor: mounted && resolvedTheme === 'dark' ? '#061629' : '' }}
+      >
         <div className="container mx-auto px-6">
           <ScrollAnimation animation="fade-in-up" className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">{t.portfolio.title}</h2>
@@ -210,8 +233,14 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
           </ScrollAnimation>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <Link href={`/projects/${project.slug}`} key={project.slug} className="group bg-background rounded-xl overflow-hidden border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-xl flex flex-col">
-                <div className="aspect-video relative overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+              <Link href={`/projects/${project.slug}`} key={project.slug} className="group !bg-white rounded-xl overflow-hidden border-2 border-zinc-200 dark:border-zinc-200 hover:border-accent dark:hover:border-accent transition-all hover:shadow-xl flex flex-col relative">
+                {project.frontmatter.featured && (
+                  <div className="absolute top-0 right-0 bg-accent text-accent-foreground px-3 py-1 rounded-bl-lg shadow-sm z-20 flex items-center gap-1">
+                    <Pin className="w-3 h-3 fill-current" />
+                    <span className="text-[10px] font-bold uppercase">Featured</span>
+                  </div>
+                )}
+                <div className="aspect-video relative overflow-hidden bg-zinc-100 dark:bg-zinc-100">
                   {project.frontmatter.coverImage ? (
                     <img
                       src={project.frontmatter.coverImage}
@@ -221,21 +250,16 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
                   ) : (
                     <div className={`w-full h-full bg-gradient-to-br ${project.frontmatter.gradient || 'from-primary to-accent'}`}></div>
                   )}
-                  {project.frontmatter.featured && (
-                    <div className="absolute top-3 right-3 bg-accent text-white p-2 rounded-full shadow-lg z-10" title="Featured Project">
-                      <Pin className="w-4 h-4 fill-current" />
-                    </div>
-                  )}
                 </div>
                 <div className="p-6 flex flex-col flex-1">
-                  <div className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400 mb-3">
+                  <div className="flex items-center gap-2 text-xs !text-[#71717a] mb-3">
                     <Calendar className="w-3 h-3" />
                     <span>{new Date(project.frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                   </div>
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
+                  <h3 className="text-xl font-semibold mb-2 !text-[#0A2342] group-hover:!text-accent transition-colors">
                     {project.frontmatter.title}
                   </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-4 flex-1">
+                  <p className="!text-[#52525b] mb-4 flex-1">
                     {project.frontmatter.excerpt}
                   </p>
                   <div className="flex flex-wrap gap-2 mt-auto">
@@ -272,154 +296,42 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Press Release 1 */}
-            <ScrollAnimation delay={100} animation="fade-in-up">
-              <article className="group bg-zinc-50 dark:bg-zinc-900/50 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg h-full flex flex-col">
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center gap-2 text-sm text-accent mb-3">
-                    <Newspaper className="w-4 h-4" />
-                    <span className="font-semibold">{t.press.types.press}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">
-                    PT X Secures $5M Series A Funding to Expand AI Solutions
-                  </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-4 flex-1">
-                    Leading venture capital firm invests in PT X's innovative approach to enterprise AI solutions, enabling expansion across Southeast Asia.
-                  </p>
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800">
-                    <div className="flex items-center gap-2 text-sm text-zinc-500">
-                      <Calendar className="w-4 h-4" />
-                      <span>Nov 15, 2024</span>
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-              </article>
-            </ScrollAnimation>
-
-            {/* Company News 2 */}
-            <ScrollAnimation delay={200} animation="fade-in-up">
-              <article className="group bg-zinc-50 dark:bg-zinc-900/50 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg h-full flex flex-col">
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center gap-2 text-sm text-accent mb-3">
-                    <Award className="w-4 h-4" />
-                    <span className="font-semibold">{t.press.types.award}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">
-                    Named "Best Tech Startup 2024" by Indonesia Tech Awards
-                  </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-4 flex-1">
-                    PT X recognized for outstanding innovation and contribution to Indonesia's technology ecosystem and digital transformation.
-                  </p>
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800">
-                    <div className="flex items-center gap-2 text-sm text-zinc-500">
-                      <Calendar className="w-4 h-4" />
-                      <span>Oct 28, 2024</span>
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-              </article>
-            </ScrollAnimation>
-
-            {/* Event 3 */}
-            <ScrollAnimation delay={300} animation="fade-in-up">
-              <article className="group bg-zinc-50 dark:bg-zinc-900/50 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg h-full flex flex-col">
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center gap-2 text-sm text-accent mb-3">
-                    <Users className="w-4 h-4" />
-                    <span className="font-semibold">{t.press.types.event}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">
-                    PT X Hosts Annual Developer Conference 2024
-                  </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-4 flex-1">
-                    Over 500 developers gathered to explore the latest in cloud computing, AI, and software engineering best practices.
-                  </p>
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800">
-                    <div className="flex items-center gap-2 text-sm text-zinc-500">
-                      <Calendar className="w-4 h-4" />
-                      <span>Oct 12, 2024</span>
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-              </article>
-            </ScrollAnimation>
-
-            {/* Partnership 4 */}
-            <ScrollAnimation delay={100} animation="fade-in-up">
-              <article className="group bg-zinc-50 dark:bg-zinc-900/50 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg h-full flex flex-col">
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center gap-2 text-sm text-accent mb-3">
-                    <Sparkles className="w-4 h-4" />
-                    <span className="font-semibold">{t.press.types.partnership}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">
-                    Strategic Partnership with Global Cloud Provider
-                  </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-4 flex-1">
-                    PT X partners with leading cloud infrastructure provider to deliver enhanced enterprise solutions to clients worldwide.
-                  </p>
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800">
-                    <div className="flex items-center gap-2 text-sm text-zinc-500">
-                      <Calendar className="w-4 h-4" />
-                      <span>Sep 20, 2024</span>
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-              </article>
-            </ScrollAnimation>
-
-            {/* Community 5 */}
-            <ScrollAnimation delay={200} animation="fade-in-up">
-              <article className="group bg-zinc-50 dark:bg-zinc-900/50 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg h-full flex flex-col">
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center gap-2 text-sm text-accent mb-3">
-                    <Users className="w-4 h-4" />
-                    <span className="font-semibold">{t.press.types.community}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">
-                    Launched Free Coding Bootcamp for Underserved Youth
-                  </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-4 flex-1">
-                    PT X's social initiative provides free programming education to 100 students from underrepresented communities.
-                  </p>
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800">
-                    <div className="flex items-center gap-2 text-sm text-zinc-500">
-                      <Calendar className="w-4 h-4" />
-                      <span>Aug 15, 2024</span>
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-              </article>
-            </ScrollAnimation>
-
-            {/* Media Coverage 6 */}
-            <ScrollAnimation delay={300} animation="fade-in-up">
-              <article className="group bg-zinc-50 dark:bg-zinc-900/50 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg h-full flex flex-col">
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center gap-2 text-sm text-accent mb-3">
-                    <Newspaper className="w-4 h-4" />
-                    <span className="font-semibold">{t.press.types.media}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">
-                    Featured in TechCrunch: "The Future of Enterprise Software"
-                  </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-4 flex-1">
-                    PT X's CEO discusses the company's vision for transforming how businesses leverage technology for growth.
-                  </p>
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800">
-                    <div className="flex items-center gap-2 text-sm text-zinc-500">
-                      <Calendar className="w-4 h-4" />
-                      <span>Jul 30, 2024</span>
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-              </article>
-            </ScrollAnimation>
+            {pressItems.map((item, index) => {
+              const Icon = getCategoryIcon(item.frontmatter.category);
+              return (
+                <ScrollAnimation key={index} delay={100 + (index % 3) * 100} animation="fade-in-up">
+                  <Link href={`/press/${item.slug}`} className="block h-full">
+                    <article className="group !bg-white rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-200 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg h-full flex flex-col relative">
+                      {item.frontmatter.pinned && (
+                        <div className="absolute top-0 right-0 bg-accent text-accent-foreground px-3 py-1 rounded-bl-lg shadow-sm z-10 flex items-center gap-1">
+                          <Pin className="w-3 h-3 fill-current" />
+                          <span className="text-[10px] font-bold uppercase">Pinned</span>
+                        </div>
+                      )}
+                      <div className="p-6 flex-1 flex flex-col">
+                        <div className="flex items-center gap-2 text-sm text-accent dark:text-[#0A2342] mb-3">
+                          <Icon className="w-4 h-4" />
+                          <span className="font-semibold">{t.press.types[item.frontmatter.category as keyof typeof t.press.types]}</span>
+                        </div>
+                        <h3 className="text-xl font-semibold mb-3 !text-[#0A2342] group-hover:!text-accent transition-colors">
+                          {item.frontmatter.title}
+                        </h3>
+                        <p className="!text-[#52525b] mb-4 flex-1">
+                          {item.frontmatter.description}
+                        </p>
+                        <div className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-200">
+                          <div className="flex items-center gap-2 text-sm !text-[#71717a]">
+                            <Calendar className="w-4 h-4" />
+                            <span>{new Date(item.frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                          </div>
+                          <ExternalLink className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                      </div>
+                    </article>
+                  </Link>
+                </ScrollAnimation>
+              );
+            })}
           </div>
 
           {/* View All Press Button */}
@@ -436,18 +348,20 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
       </section>
 
       {/* Clients Section */}
-      <section id="clients" className="py-24 bg-zinc-50 dark:bg-zinc-900/50 scroll-mt-20">
+      <section
+        id="clients"
+        className="py-24 bg-zinc-50 scroll-mt-20"
+        style={{ backgroundColor: mounted && resolvedTheme === 'dark' ? '#061629' : '' }}
+      >
         <div className="container mx-auto px-6">
           <ScrollAnimation animation="fade-in-up" className="text-center mb-16">
             <h2
               className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
-              style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
             >
               {t.clients.title}
             </h2>
             <p
-              className="text-lg max-w-2xl mx-auto"
-              style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : 'rgba(10,35,66,0.8)' }}
+              className="text-lg text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto"
             >
               {t.clients.subtitle}
             </p>
@@ -468,7 +382,7 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
                   </div>
                   <p
                     className="text-sm font-semibold"
-                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
                     TechCorp Global
                   </p>
@@ -488,7 +402,7 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
                   </div>
                   <p
                     className="text-sm font-semibold"
-                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
                     FinanceInc
                   </p>
@@ -508,7 +422,7 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
                   </div>
                   <p
                     className="text-sm font-semibold"
-                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
                     HealthCare Plus
                   </p>
@@ -528,7 +442,7 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
                   </div>
                   <p
                     className="text-sm font-semibold"
-                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
                     EduLearn
                   </p>
@@ -548,7 +462,7 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
                   </div>
                   <p
                     className="text-sm font-semibold"
-                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
                     RetailMax
                   </p>
@@ -558,7 +472,7 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
             <ScrollAnimation delay={150} animation="fade-in">
               <div className="flex items-center justify-center p-8 bg-background rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg group">
                 <div className="text-center">
-                  <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-primary to-sky mb-3 flex items-center justify-center">
+                  <div className="w-24 h-24 mx-auto rounded-lg bg-gradient-to-br from-primary to-night-sky mb-3 flex items-center justify-center">
                     <span
                       className="font-bold text-xl"
                       style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
@@ -568,9 +482,9 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
                   </div>
                   <p
                     className="text-sm font-semibold"
-                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
-                    LogiSmart
+                    LogiSolutions
                   </p>
                 </div>
               </div>
@@ -588,7 +502,7 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
                   </div>
                   <p
                     className="text-sm font-semibold"
-                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
                     MediaPro
                   </p>
@@ -608,7 +522,7 @@ export default function HomeContent({ projects: initialProjects }: HomeContentPr
                   </div>
                   <p
                     className="text-sm font-semibold"
-                    style={{ color: mounted && resolvedTheme === 'dark' ? '#d4d4d8' : '#0A2342' }}
+                    style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
                     StartupMakers
                   </p>
