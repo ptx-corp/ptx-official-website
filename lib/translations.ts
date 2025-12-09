@@ -70,6 +70,7 @@ export const translations = {
             info: "info@ptx.co.th",
             phone: "+66 2-162-0878",
             address: "111/6, Lat Phrao 23, Chandrakasem, Chatuchak, Bangkok, 10900",
+            taxId: "Tax ID 0105568142474",
         },
         footer: {
             rights: "© {year} PT X. All rights reserved.",
@@ -149,6 +150,7 @@ export const translations = {
             info: "info@ptx.co.th",
             phone: "+66 2-162-0878",
             address: "111/6 ซอย ลาดพร้าว 23 แขวงจันทรเกษม เขตจตุจักร กรุงเทพฯ 10900",
+            taxId: "เลขประจำตัวผู้เสียภาษี 0105568142474",
         },
         footer: {
             rights: "© {year} PT X. สงวนลิขสิทธิ์",
