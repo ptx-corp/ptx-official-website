@@ -61,6 +61,16 @@ export const translations = {
         clients: {
             title: "Our Clients",
             subtitle: "Trusted by leading companies across various industries",
+            names: {
+                rd: "Revolution Didactic",
+                ch: "Clicknic Health",
+                ad: "Aurora Design",
+                cu: "Chulalongkorn University",
+                dm: "Daisae Metrology",
+                wg: "Wiroon & Gwyness",
+                ind: "Inno Industry",
+                caat: "The Civil Aviation Authority of Thailand",
+            }
         },
         contact: {
             title: "Ready to Start Your Next Project?",
@@ -141,6 +151,16 @@ export const translations = {
         clients: {
             title: "ลูกค้าของเรา",
             subtitle: "ได้รับความไว้วางใจจากบริษัทชั้นนำในหลากหลายอุตสาหกรรม",
+            names: {
+                rd: "เรฟโวลูชั่น ไดแดคติค",
+                ch: "คลิกนิก เฮลท์",
+                ad: "ออโรร่า ดีไซน์",
+                cu: "จุฬาลงกรณ์มหาวิทยาลัย",
+                dm: "ไดแซอิ เมโทรโลยี",
+                wg: "วิรุฬห์ แอนด์ เกวนเนส",
+                ind: "อินโน อินดัสทรี",
+                caat: "สำนักงานการบินพลเรือนแห่งประเทศไทย",
+            }
         },
         contact: {
             title: "พร้อมเริ่มโครงการถัดไปของคุณหรือยัง?",

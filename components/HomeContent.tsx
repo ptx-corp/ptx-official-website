@@ -380,14 +380,14 @@ export default function HomeContent({ projects: initialProjects, press: initialP
                       className="font-bold text-xl"
                       style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                     >
-                      TC
+                      RD
                     </span>
                   </div>
                   <p
                     className="text-sm font-semibold"
                     style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
-                    TechCorp Global
+                    {t.clients.names.rd}
                   </p>
                 </div>
               </div>
@@ -400,14 +400,14 @@ export default function HomeContent({ projects: initialProjects, press: initialP
                       className="font-bold text-xl"
                       style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                     >
-                      FI
+                      CH
                     </span>
                   </div>
                   <p
                     className="text-sm font-semibold"
                     style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
-                    FinanceInc
+                    {t.clients.names.ch}
                   </p>
                 </div>
               </div>
@@ -420,14 +420,14 @@ export default function HomeContent({ projects: initialProjects, press: initialP
                       className="font-bold text-xl"
                       style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                     >
-                      HC
+                      AD
                     </span>
                   </div>
                   <p
                     className="text-sm font-semibold"
                     style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
-                    HealthCare Plus
+                    {t.clients.names.ad}
                   </p>
                 </div>
               </div>
@@ -440,14 +440,14 @@ export default function HomeContent({ projects: initialProjects, press: initialP
                       className="font-bold text-xl"
                       style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                     >
-                      EL
+                      CU
                     </span>
                   </div>
                   <p
                     className="text-sm font-semibold"
                     style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
-                    EduLearn
+                    {t.clients.names.cu}
                   </p>
                 </div>
               </div>
@@ -460,14 +460,14 @@ export default function HomeContent({ projects: initialProjects, press: initialP
                       className="font-bold text-xl"
                       style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                     >
-                      RM
+                      DM
                     </span>
                   </div>
                   <p
                     className="text-sm font-semibold"
                     style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
-                    RetailMax
+                    {t.clients.names.dm}
                   </p>
                 </div>
               </div>
@@ -480,14 +480,14 @@ export default function HomeContent({ projects: initialProjects, press: initialP
                       className="font-bold text-xl"
                       style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                     >
-                      LS
+                      WG
                     </span>
                   </div>
                   <p
                     className="text-sm font-semibold"
                     style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
-                    LogiSolutions
+                    {t.clients.names.wg}
                   </p>
                 </div>
               </div>
@@ -500,14 +500,14 @@ export default function HomeContent({ projects: initialProjects, press: initialP
                       className="font-bold text-xl"
                       style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                     >
-                      MP
+                      IND
                     </span>
                   </div>
                   <p
                     className="text-sm font-semibold"
                     style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
-                    MediaPro
+                    {t.clients.names.ind}
                   </p>
                 </div>
               </div>
@@ -520,14 +520,14 @@ export default function HomeContent({ projects: initialProjects, press: initialP
                       className="font-bold text-xl"
                       style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                     >
-                      SM
+                      CAAT
                     </span>
                   </div>
                   <p
                     className="text-sm font-semibold"
                     style={{ color: mounted && resolvedTheme === 'dark' ? '#ffffff' : '#0A2342' }}
                   >
-                    StartupMakers
+                    {t.clients.names.caat}
                   </p>
                 </div>
               </div>
