@@ -4,7 +4,7 @@
 
 import Logo from "./Logo";
 import Link from "next/link";
-import { ArrowRight, Code, Sparkles, Users, Award, MessageCircle, Mail, Newspaper, Calendar, ExternalLink, Pin } from "lucide-react";
+import { ArrowRight, Code, Sparkles, Users, Award, MessageCircle, Mail, Newspaper, Calendar, ExternalLink, Pin, Monitor, FileText, Wrench, Building2, Headset, Zap } from "lucide-react";
 import { ScrollAnimation } from "./ScrollAnimation";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -153,66 +153,66 @@ export default function HomeContent({ projects: initialProjects, press: initialP
             <ScrollAnimation delay={100} animation="fade-in-up">
               <div className="p-8 rounded-xl border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-colors h-full">
                 <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                  <Code className="w-6 h-6 text-accent" />
+                  <Monitor className="w-6 h-6 text-accent" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{t.services.customSoftware}</h3>
+                <h3 className="text-xl font-semibold mb-3">{t.services.itDistribution}</h3>
                 <p className="text-zinc-600 dark:text-zinc-400">
-                  {t.services.customSoftwareDesc}
+                  {t.services.itDistributionDesc}
                 </p>
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={200} animation="fade-in-up">
               <div className="p-8 rounded-xl border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-colors h-full">
                 <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                  <Sparkles className="w-6 h-6 text-accent" />
+                  <FileText className="w-6 h-6 text-accent" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{t.services.webMobile}</h3>
+                <h3 className="text-xl font-semibold mb-3">{t.services.torConsulting}</h3>
                 <p className="text-zinc-600 dark:text-zinc-400">
-                  {t.services.webMobileDesc}
+                  {t.services.torConsultingDesc}
                 </p>
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={300} animation="fade-in-up">
               <div className="p-8 rounded-xl border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-colors h-full">
                 <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                  <Users className="w-6 h-6 text-accent" />
+                  <Wrench className="w-6 h-6 text-accent" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{t.services.consulting}</h3>
+                <h3 className="text-xl font-semibold mb-3">{t.services.engineeringKits}</h3>
                 <p className="text-zinc-600 dark:text-zinc-400">
-                  {t.services.consultingDesc}
+                  {t.services.engineeringKitsDesc}
                 </p>
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={100} animation="fade-in-up">
               <div className="p-8 rounded-xl border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-colors h-full">
                 <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                  <Award className="w-6 h-6 text-accent" />
+                  <Building2 className="w-6 h-6 text-accent" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{t.services.productDesign}</h3>
+                <h3 className="text-xl font-semibold mb-3">{t.services.enterpriseSolutions}</h3>
                 <p className="text-zinc-600 dark:text-zinc-400">
-                  {t.services.productDesignDesc}
+                  {t.services.enterpriseSolutionsDesc}
                 </p>
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={200} animation="fade-in-up">
               <div className="p-8 rounded-xl border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-colors h-full">
                 <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                  <Code className="w-6 h-6 text-accent" />
+                  <Headset className="w-6 h-6 text-accent" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{t.services.cloudSolutions}</h3>
+                <h3 className="text-xl font-semibold mb-3">{t.services.technicalSupport}</h3>
                 <p className="text-zinc-600 dark:text-zinc-400">
-                  {t.services.cloudSolutionsDesc}
+                  {t.services.technicalSupportDesc}
                 </p>
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={300} animation="fade-in-up">
               <div className="p-8 rounded-xl border-2 border-zinc-200 dark:border-zinc-800 hover:border-accent dark:hover:border-accent transition-colors h-full">
                 <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                  <Sparkles className="w-6 h-6 text-accent" />
+                  <Zap className="w-6 h-6 text-accent" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{t.services.aiMl}</h3>
+                <h3 className="text-xl font-semibold mb-3">{t.services.digitalTransformation}</h3>
                 <p className="text-zinc-600 dark:text-zinc-400">
-                  {t.services.aiMlDesc}
+                  {t.services.digitalTransformationDesc}
                 </p>
               </div>
             </ScrollAnimation>
