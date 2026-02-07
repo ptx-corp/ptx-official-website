@@ -49,9 +49,9 @@ export default function HomeContent({ projects: initialProjects, press: initialP
 
   // Animated counters - re-trigger on theme change
   const projectsCount = useCountAnimation(50, 2000, mounted ? animationTrigger : false);
-  const clientsCount = useCountAnimation(30, 2000, mounted ? animationTrigger : false);
-  const yearsCount = useCountAnimation(8, 2000, mounted ? animationTrigger : false);
-  const teamCount = useCountAnimation(15, 2000, mounted ? animationTrigger : false);
+  const clientsCount = useCountAnimation(100, 2000, mounted ? animationTrigger : false);
+  const yearsCount = useCountAnimation(10, 2000, mounted ? animationTrigger : false);
+  const teamCount = useCountAnimation(20, 2000, mounted ? animationTrigger : false);
 
   useEffect(() => {
     setMounted(true);

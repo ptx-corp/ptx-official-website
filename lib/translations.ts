@@ -20,7 +20,7 @@ export const translations = {
             projects: "Projects Delivered",
             clients: "Happy Clients",
             years: "Years Experience",
-            team: "Team Members",
+            team: "Project Value",
         },
         services: {
             title: "Our Services",
@@ -73,10 +73,10 @@ export const translations = {
             }
         },
         contact: {
-            title: "Ready to Start Your Next Project?",
-            description: "Let's discuss how we can help transform your ideas into reality. Our team is ready to bring your vision to life.",
+            title: "Partner with PTX for Your Technology Solutions",
+            description: "From high-spec IT hardware to advanced engineering kits, we provide the technical expertise to ensure your requirements are met with precision. Let’s collaborate to empower your organization.",
             email: "Email Us",
-            schedule: "Schedule a Call",
+            schedule: "Call Us",
             info: "info@ptx.co.th",
             phone: "+66 2-162-0878",
             address: "111/6, Lat Phrao 23, Chandrakasem, Chatuchak, Bangkok, 10900",
@@ -163,10 +163,10 @@ export const translations = {
             }
         },
         contact: {
-            title: "พร้อมเริ่มโครงการถัดไปของคุณหรือยัง?",
-            description: "มาคุยกันว่าเราจะช่วยเปลี่ยนไอเดียของคุณให้เป็นจริงได้อย่างไร ทีมงานของเราพร้อมที่จะทำให้วิสัยทัศน์ของคุณเป็นจริง",
+            title: "ให้ PT X เป็นคู่คิดในทุกโซลูชันเทคโนโลยีของคุณ",
+            description: "ไม่ว่าจะเป็นการจัดหาอุปกรณ์ไอทีหรือชุดฝึกการสอนที่ซับซ้อน เราพร้อมให้คำปรึกษาเชิงลึกเพื่อให้ได้สินค้าที่ตรงสเปกและคุ้มค่าที่สุด มาคุยกับเราเพื่อก้าวไปสู่ความสำเร็จด้วยกัน",
             email: "ส่งอีเมลหาเรา",
-            schedule: "นัดหมายการโทร",
+            schedule: "โทรหาเรา",
             info: "info@ptx.co.th",
             phone: "+66 2-162-0878",
             address: "111/6 ซอย ลาดพร้าว 23 แขวงจันทรเกษม เขตจตุจักร กรุงเทพฯ 10900",
