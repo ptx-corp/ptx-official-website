@@ -87,11 +87,11 @@ export default function HomeContent({ projects: initialProjects, press: initialP
                 />
               )}
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground animate-fade-in-up delay-100">
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground animate-fade-in-up delay-100">
               {t.hero.title}
               <span className="block text-accent mt-2">{t.hero.subtitle}</span>
             </h1>
-            <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-300 max-w-2xl animate-fade-in-up delay-200">
+            <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-300 max-w-2xl animate-fade-in-up delay-200">
               {t.hero.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mt-4 animate-fade-in-up delay-300">
