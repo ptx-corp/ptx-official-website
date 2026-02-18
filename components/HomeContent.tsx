@@ -4,6 +4,7 @@
 
 import Logo from "./Logo";
 import Link from "next/link";
+import Footer from "./Footer";
 import { ArrowRight, Code, Sparkles, Users, Award, MessageCircle, Mail, Newspaper, Calendar, ExternalLink, Pin, Monitor, FileText, Wrench, Building2, Headset, Zap } from "lucide-react";
 import { ScrollAnimation } from "./ScrollAnimation";
 import { useTheme } from "next-themes";
@@ -623,27 +624,7 @@ export default function HomeContent({ projects: initialProjects, press: initialP
         </div>
       </section>
 
-      {/* Footer */}
-      < footer className="py-8 bg-background border-t border-zinc-200 dark:border-zinc-800" >
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-              <Logo className="w-24 h-auto" />
-              <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                {t.footer.rights.replace('{year}', new Date().getFullYear().toString())}
-              </p>
-            </div>
-            <div className="flex gap-6">
-              <Link href="/privacy" className="text-zinc-600 dark:text-zinc-400 hover:text-accent transition-colors">
-                {t.footer.privacy}
-              </Link>
-              <Link href="/terms" className="text-zinc-600 dark:text-zinc-400 hover:text-accent transition-colors">
-                {t.footer.terms}
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer >
+      <Footer />
 
     </div >
   );

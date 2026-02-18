@@ -28,6 +28,7 @@ export function Navigation() {
     { href: "/#portfolio", label: t.nav.portfolio },
     { href: "/#press", label: t.nav.press },
     { href: "/#clients", label: t.nav.clients },
+    { href: "/careers", label: t.nav.careers },
     { href: "https://shop.ptx.co.th", label: t.nav.shop, external: true },
     { href: "/#contact", label: t.nav.contact },
   ];
